@@ -42,8 +42,8 @@
   <h1>Olá meu amor Lerinha! 💕</h1>
 
   <div class="section">
-    <p><span class="icone">📅</span><strong>Idade Gestacional (DUM): <span id="dumSemanas"></span></strong> — DPP: <strong>26/11/2025</strong></p>
-    <p><span class="icone">📅</span><strong>Idade Gestacional (Ultrassom): <span id="usgSemanas"></span></strong> — DPP: <strong>31/10/2025</strong></p>
+    <p><span class="icone">📅</span><strong>Idade Gestacional (DUM - 20/02/2025): <span id="dumSemanas"></span></strong> — DPP: <strong>26/11/2025</strong></p>
+    <p><span class="icone">📅</span><strong>Idade Gestacional (Ultrassom - 23/04/2025): <span id="usgSemanas"></span></strong> — DPP: <strong>31/10/2025</strong></p>
     <p><span class="icone">⏰</span>Dias restantes (DUM): <strong id="diasRestantes"></strong></p>
     <p><span class="icone">📊</span>Trimestre: <strong id="trimestre"></strong></p>
     <p><span class="icone">ℹ️</span>Informações do Trimestre: <em>Período mais confortável da gravidez. O bebê está crescendo rapidamente.</em></p>
@@ -80,10 +80,10 @@
     }
 
     const dum = calcSemanasDias("2025-02-20");
-    const usg = calcSemanasDias("2025-01-31"); // retrocedendo 12s4d a partir de 23/04/2025
+    const usg = calcSemanasDias("2025-01-31"); // 12s4d antes de 23/04/2025
 
-    document.getElementById("dumSemanas").innerText = `${dum.semanas} semanas e ${dum.rest0 || dum.resto} dias`;
-    document.getElementById("usgSemanas").innerText = `${usg.semanas} semanas e ${usg.rest0 || usg.resto} dias`;
+    document.getElementById("dumSemanas").innerText = `${dum.semanas} semanas e ${dum.resto} dias`;
+    document.getElementById("usgSemanas").innerText = `${usg.semanas} semanas e ${usg.resto} dias`;
     document.getElementById("diasRestantes").innerText = `${280 - dum.dias} dias`;
     document.getElementById("trimestre").innerText = getTrimestre(dum.semanas);
     document.getElementById("semanaTexto").innerText = `${dum.semanas} semanas`;
