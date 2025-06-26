@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador de Gestação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="saudacao"></h1>
+    <label for="data_dum">Data da Última Menstruação (dd/mm/aaaa):</label>
+    <input type="text" id="data_dum" placeholder="dd/mm/aaaa" required>
+    <button onclick="calcular()">Calcular</button>
+
+    <h2 id="resultado"></h2>
+    <h3>Links para Informações Científicas</h3>
+    <div id="links"></div>
+    <h3>Meditação do Dia</h3>
+    <div id="meditacao"></div>
+
+    <script>
+        function calcular() {
+            const dataDum = document.getElementById('data_dum').value;
+            const [dia, mes, ano] = dataDum.split('/').map(Number);
+            const dataUltimaMenstruacao = new Date(ano, mes - 1, dia);
+            const dataAtual = new Date();
+
+            // Calcular semanas de gestação
+            const semanasGestacao = Math.floor((dataAtual - dataUltimaMenstruacao) / (1000 * 60 * 60 * 24 * 7));
+            
+            // Calcular data do parto
+            const dataParto = new Date(dataUltimaMenstruacao);
+            dataParto.setDate(dataParto.getDate() + 280); // 40 semanas
+
+            // Formatar a data do parto
+            const diaParto = String(dataParto.getDate()).padStart(2, '0');
+            const mesParto = String(dataParto.getMonth() + 1).padStart(2, '0');
+            const anoParto = dataParto.getFullYear();
+
+            // Exibir resultados
+            document.getElementById('resultado').innerHTML = `Semanas de gestação: ${semanasGestacao}<br>Data prevista do parto: ${diaParto}/${mesParto}/${anoParto}`;
+
+            // Links para informações científicas
+            const links = [
+                { semana: 12, link: "https://www.example.com/sulfato-ferroso", descricao: "Uso de sulfato ferroso" },
+                { semana: 20, link: "https://www.example.com/ultrassom", descricao: "Importância do ultrassom" },
+                // Adicione mais links conforme necessário
+            ];
+
+            const linksDiv = document.getElementById('links');
+            linksDiv.innerHTML = '';
+            links.forEach(item => {
+                if (semanasGestacao >= item.semana) {
+                    linksDiv.innerHTML += `<a href="${item.link}" target="_blank">${item.descricao} (Semana ${item.semana})</a><br>`;
+                }
+            });
+
+            // Meditação do dia
+            const meditacoes = [
+                "Meditação 1: Agradeça a Deus pela vida que está se formando.",
+                "Meditação 2: Reze pela saúde da mãe e do bebê.",
+                "Meditação 3: Peça sabedoria para os desafios da maternidade.",
+                // Adicione mais meditações conforme necessário
+            ];
+
+            const hoje = new Date();
+            const meditacaoDoDia = meditacoes[hoje.getDate() % meditacoes.length]; // Seleciona uma meditação com base no dia do mês
+            document.getElementById('meditacao').innerHTML = meditacaoDoDia;
+        }
+
+        function saudacao() {
+            const agora = new Date();
+            const hora = agora.getHours();
+            let saudacao = "Olá, meu amor Lerinha!";
+
+            if (hora < 12) {
+                saudacao = "Bom dia, meu amor Lerinha!";
+            } else if (hora < 18) {
+                saudacao = "Boa tarde, meu amor Lerinha!";
+            } else {
+                saudacao = "Boa noite, meu amor Lerinha!";
+            }
+
+            document.getElementById('saudacao').innerText = saudacao;
+        }
+
+        // Chama a função de saudação ao carregar a página
+        saudacao();
