@@ -1,76 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador de Gestação</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        input {
-            margin: 10px 0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Olá meu amor Lerinha!</title>
+  <style>
+    body { font-family: sans-serif; background: #fff8f0; color: #333; padding: 2rem; }
+    h1 { color: #d16ba5; }
+    .section { margin-bottom: 2rem; }
+  </style>
 </head>
 <body>
-    <h1 id="saudacao"></h1>
-    <h2>Data da Última Menstruação: <span id="data_dum_display"></span></h2>
-    <h2>Data do Exame de Ultrassom: <span id="data_ultrassom_display">23/04/2025</span></h2>
-    <button onclick="calcular()">Calcular</button>
+  <h1>Olá meu amor Lerinha!</h1>
+  <div class="section">
+    <p>Hoje estamos com <strong>X semanas e Y dias</strong> de gestação!</p>
+    <p>Data provável do parto (DUM): <strong>27/11/2025</strong></p>
+    <p>Data provável do parto (Ultrassom): <strong>31/10/2025</strong></p>
+  </div>
+  <div class="section">
+    <h2>Versículo do dia</h2>
+    <blockquote id="versiculo">Carregando versículo...</blockquote>
+  </div>
+  <div class="section">
+    <h2>Cuidados e desenvolvimento nesta semana</h2>
+    <p id="infoSemana">Carregando informações...</p>
+  </div>
+  <script>
+    // Exemplo de chamada à API da Bíblia
+    fetch('https://www.abibliadigital.com.br/api/verses/nvi/sl/23')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('versiculo').innerText = data.verses[0].text;
+      });
 
-    <h2 id="resultado"></h2>
-    <h3>Links para Informações Científicas</h3>
-    <div id="links"></div>
-    <h3>Meditação do Dia</h3>
-    <div id="meditacao"></div>
-
-    <script>
-        const dataDum = "20/02/2025"; // Data da última menstruação
-        const dataUltrassom = "23/04/2025"; // Data do exame de ultrassom
-
-        function calcular() {
-            // Cálculo baseado na DUM
-            const [diaDum, mesDum, anoDum] = dataDum.split('/').map(Number);
-            const dataUltimaMenstruacao = new Date(anoDum, mesDum - 1, diaDum);
-            const dataAtual = new Date();
-
-            // Calcular semanas de gestação a partir da DUM
-            const semanasGestacaoDum = Math.floor((dataAtual - dataUltimaMenstruacao) / (1000 * 60 * 60 * 24 * 7));
-            
-            // Calcular data do parto a partir da DUM
-            const dataPartoDum = new Date(dataUltimaMenstruacao);
-            dataPartoDum.setDate(dataPartoDum.getDate() + 280); // 40 semanas
-
-            // Cálculo baseado na ultrassom
-            const [diaUltrassom, mesUltrassom, anoUltrassom] = dataUltrassom.split('/').map(Number);
-            const dataExame = new Date(anoUltrassom, mesUltrassom - 1, diaUltrassom);
-            const semanasGestacaoUltrassom = 12 + Math.floor((dataAtual - dataExame) / (1000 * 60 * 60 * 24 * 7)); // 12 semanas e 4 dias
-
-            // Calcular data do parto a partir da ultrassom
-            const dataPartoUltrassom = new Date(dataExame);
-            dataPartoUltrassom.setDate(dataPartoUltrassom.getDate() + 280); // 40 semanas
-
-            // Formatar as datas do parto
-            const formatarData = (data) => {
-                const dia = String(data.getDate()).padStart(2, '0');
-                const mes = String(data.getMonth() + 1).padStart(2, '0');
-                const ano = data.getFullYear();
-                return `${dia}/${mes}/${ano}`;
-            };
-
-            // Exibir resultados
-            document.getElementById('resultado').innerHTML = `
-                <strong>Baseado na DUM:</strong><br>
-                Semanas de gestação: ${semanasGestacaoDum}<br>
-                Data prevista do parto: ${formatarData(dataPartoDum)}<br><br>
-                <strong>Baseado na Ultrassom:</strong><br>
-                Semanas de gestação: ${semanasGestacaoUltrassom}<br>
-                Data prevista do parto: ${formatarData(dataPartoUltrassom)}
-            `;
-
-            // Links para informações científicas
-            const links = [
-                { semana: 12, link: "https://www.example.com/sulfato-ferroso", descricao: "Uso de sulfato ferroso" },
-                { semana: 20, link: "https://www.example.com/ultrassom", descricao: "
+    // Aqui você pode carregar um JSON local com as informações semanais
+  </script>
+</body>
+</html>
