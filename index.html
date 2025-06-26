@@ -16,8 +16,8 @@
 </head>
 <body>
     <h1 id="saudacao"></h1>
-    <label for="data_dum">Data da Última Menstruação (dd/mm/aaaa):</label>
-    <input type="text" id="data_dum" placeholder="dd/mm/aaaa" required>
+    <h2>Data da Última Menstruação: <span id="data_dum_display"></span></h2>
+    <h2>Data do Exame de Ultrassom: <span id="data_ultrassom_display">23/04/2025</span></h2>
     <button onclick="calcular()">Calcular</button>
 
     <h2 id="resultado"></h2>
@@ -27,70 +27,50 @@
     <div id="meditacao"></div>
 
     <script>
+        const dataDum = "20/02/2025"; // Data da última menstruação
+        const dataUltrassom = "23/04/2025"; // Data do exame de ultrassom
+
         function calcular() {
-            const dataDum = document.getElementById('data_dum').value;
-            const [dia, mes, ano] = dataDum.split('/').map(Number);
-            const dataUltimaMenstruacao = new Date(ano, mes - 1, dia);
+            // Cálculo baseado na DUM
+            const [diaDum, mesDum, anoDum] = dataDum.split('/').map(Number);
+            const dataUltimaMenstruacao = new Date(anoDum, mesDum - 1, diaDum);
             const dataAtual = new Date();
 
-            // Calcular semanas de gestação
-            const semanasGestacao = Math.floor((dataAtual - dataUltimaMenstruacao) / (1000 * 60 * 60 * 24 * 7));
+            // Calcular semanas de gestação a partir da DUM
+            const semanasGestacaoDum = Math.floor((dataAtual - dataUltimaMenstruacao) / (1000 * 60 * 60 * 24 * 7));
             
-            // Calcular data do parto
-            const dataParto = new Date(dataUltimaMenstruacao);
-            dataParto.setDate(dataParto.getDate() + 280); // 40 semanas
+            // Calcular data do parto a partir da DUM
+            const dataPartoDum = new Date(dataUltimaMenstruacao);
+            dataPartoDum.setDate(dataPartoDum.getDate() + 280); // 40 semanas
 
-            // Formatar a data do parto
-            const diaParto = String(dataParto.getDate()).padStart(2, '0');
-            const mesParto = String(dataParto.getMonth() + 1).padStart(2, '0');
-            const anoParto = dataParto.getFullYear();
+            // Cálculo baseado na ultrassom
+            const [diaUltrassom, mesUltrassom, anoUltrassom] = dataUltrassom.split('/').map(Number);
+            const dataExame = new Date(anoUltrassom, mesUltrassom - 1, diaUltrassom);
+            const semanasGestacaoUltrassom = 12 + Math.floor((dataAtual - dataExame) / (1000 * 60 * 60 * 24 * 7)); // 12 semanas e 4 dias
+
+            // Calcular data do parto a partir da ultrassom
+            const dataPartoUltrassom = new Date(dataExame);
+            dataPartoUltrassom.setDate(dataPartoUltrassom.getDate() + 280); // 40 semanas
+
+            // Formatar as datas do parto
+            const formatarData = (data) => {
+                const dia = String(data.getDate()).padStart(2, '0');
+                const mes = String(data.getMonth() + 1).padStart(2, '0');
+                const ano = data.getFullYear();
+                return `${dia}/${mes}/${ano}`;
+            };
 
             // Exibir resultados
-            document.getElementById('resultado').innerHTML = `Semanas de gestação: ${semanasGestacao}<br>Data prevista do parto: ${diaParto}/${mesParto}/${anoParto}`;
+            document.getElementById('resultado').innerHTML = `
+                <strong>Baseado na DUM:</strong><br>
+                Semanas de gestação: ${semanasGestacaoDum}<br>
+                Data prevista do parto: ${formatarData(dataPartoDum)}<br><br>
+                <strong>Baseado na Ultrassom:</strong><br>
+                Semanas de gestação: ${semanasGestacaoUltrassom}<br>
+                Data prevista do parto: ${formatarData(dataPartoUltrassom)}
+            `;
 
             // Links para informações científicas
             const links = [
                 { semana: 12, link: "https://www.example.com/sulfato-ferroso", descricao: "Uso de sulfato ferroso" },
-                { semana: 20, link: "https://www.example.com/ultrassom", descricao: "Importância do ultrassom" },
-                // Adicione mais links conforme necessário
-            ];
-
-            const linksDiv = document.getElementById('links');
-            linksDiv.innerHTML = '';
-            links.forEach(item => {
-                if (semanasGestacao >= item.semana) {
-                    linksDiv.innerHTML += `<a href="${item.link}" target="_blank">${item.descricao} (Semana ${item.semana})</a><br>`;
-                }
-            });
-
-            // Meditação do dia
-            const meditacoes = [
-                "Meditação 1: Agradeça a Deus pela vida que está se formando.",
-                "Meditação 2: Reze pela saúde da mãe e do bebê.",
-                "Meditação 3: Peça sabedoria para os desafios da maternidade.",
-                // Adicione mais meditações conforme necessário
-            ];
-
-            const hoje = new Date();
-            const meditacaoDoDia = meditacoes[hoje.getDate() % meditacoes.length]; // Seleciona uma meditação com base no dia do mês
-            document.getElementById('meditacao').innerHTML = meditacaoDoDia;
-        }
-
-        function saudacao() {
-            const agora = new Date();
-            const hora = agora.getHours();
-            let saudacao = "Olá, meu amor Lerinha!";
-
-            if (hora < 12) {
-                saudacao = "Bom dia, meu amor Lerinha!";
-            } else if (hora < 18) {
-                saudacao = "Boa tarde, meu amor Lerinha!";
-            } else {
-                saudacao = "Boa noite, meu amor Lerinha!";
-            }
-
-            document.getElementById('saudacao').innerText = saudacao;
-        }
-
-        // Chama a função de saudação ao carregar a página
-        saudacao();
+                { semana: 20, link: "https://www.example.com/ultrassom", descricao: "
