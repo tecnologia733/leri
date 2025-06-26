@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Olá meu amor Lerinha!</title>
+  <meta charset="UTF-8">
+  <title>🤰Calculadora Gestacional</title>
   <style>
-    body { font-family: sans-serif; background: #fff8f0; color: #333; padding: 2rem; }
-    h1 { color: #d16ba5; }
+    body { font-family: sans-serif; background: #fef6f9; padding: 2rem; line-height: 1.6; color: #333; }
+    h1 { color: #c71585; }
     .section { margin-bottom: 2rem; }
   </style>
 </head>
 <body>
-  <h1>Olá meu amor Lerinha!</h1>
-  <div class="section">
-    <p>Hoje estamos com <strong>X semanas e Y dias</strong> de gestação!</p>
-    <p>Data provável do parto (DUM): <strong>27/11/2025</strong></p>
-    <p>Data provável do parto (Ultrassom): <strong>31/10/2025</strong></p>
+  <h1>Olá Lerinha, meu amor!</h1>
+
+  <div class="section" id="gestacao">
+    <p>Contagem baseada na DUM (20/02/2025): <strong><span id="dumSemanas"></span></strong></p>
+    <p>Contagem baseada no ultrassom (23/04/2025): <strong><span id="usgSemanas"></span></strong></p>
+    <p>DPP (DUM): <strong>26/11/2025</strong> | DPP (Ultrassom): <strong>31/10/2025</strong></p>
   </div>
+
   <div class="section">
-    <h2>Versículo do dia</h2>
+    <h2>Versículo do Dia</h2>
     <blockquote id="versiculo">Carregando versículo...</blockquote>
   </div>
+
   <div class="section">
-    <h2>Cuidados e desenvolvimento nesta semana</h2>
-    <p id="infoSemana">Carregando informações...</p>
+    <h2>Semana Atual – Cuidados e Desenvolvimento</h2>
+    <div id="infoSemana">Carregando...</div>
   </div>
+
   <script>
-    // Exemplo de chamada à API da Bíblia
-    fetch('https://www.abibliadigital.com.br/api/verses/nvi/sl/23')
+    const HOJE = new Date('2025-06-26');
+
+    function calcSemanasDias(inicio) {
+      const diff = HOJE - new Date(inicio);
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const semanas = Math.floor(dias / 7);
+      const resto = dias % 7;
+      return `${semanas} semanas e ${resto} dias`;
+    }
+
+    document.getElementById("dumSemanas").innerText = calcSemanasDias("2025-02-20");
+    document.getElementById("usgSemanas").innerText = calcSemanasDias("2025-01-31"); // retrocedendo 12s4d antes de 23/04/2025
+
+    // Versículo via backend
+    fetch('/versiculo')
       .then(res => res.json())
       .then(data => {
-        document.getElementById('versiculo').innerText = data.verses[0].text;
+        document.getElementById('versiculo').innerText = `"${data.texto}" — ${data.referencia}`;
       });
 
-    // Aqui você pode carregar um JSON local com as informações semanais
+    // Info semana
+    const semanaAtual = Math.floor((HOJE - new Date("2025-02-20")) / (1000 * 60 * 60 * 24 * 7));
+    fetch('/data/gravidez.json')
+      .then(res => res.json())
+      .then(json => {
+        const info = json[semanaAtual];
+        document.getElementById("infoSemana").innerHTML = `
+          <h3>${info.titulo}</h3>
+          <p><strong>Descrição:</strong> ${info.descricao}</p>
+          <p><strong>Cuidados:</strong> ${info.cuidados}</p>
+        `;
+      });
   </script>
 </body>
 </html>
