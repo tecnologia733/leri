@@ -2,10 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>🤰 Calculadora Gestacional - Lerinha</title>
+  <title>Olá meu amor Lerinha!</title>
   <style>
     body {
-      background: #fefefe;
+      background: #fffdfc;
       color: #333;
       font-family: 'Segoe UI', sans-serif;
       padding: 2rem;
@@ -32,8 +32,8 @@
       padding-left: 1rem;
     }
     .icone {
-      font-size: 1.5rem;
-      margin-right: 0.5rem;
+      font-size: 1.4rem;
+      margin-right: 0.4rem;
     }
   </style>
 </head>
@@ -42,10 +42,8 @@
   <h1>Olá meu amor Lerinha! 💕</h1>
 
   <div class="section">
-    <p><span class="icone">📅</span>Idade Gestacional (DUM): <strong><span id="dumSemanas"></span></strong></p>
-    <p><span class="icone">📅</span>Idade Gestacional (Ultrassom): <strong><span id="usgSemanas"></span></strong></p>
-    <p><span class="icone">📆</span>DPP (DUM): <strong>26/11/2025</strong></p>
-    <p><span class="icone">📆</span>DPP (Ultrassom): <strong>31/10/2025</strong></p>
+    <p><span class="icone">📅</span><strong>Idade Gestacional (DUM): <span id="dumSemanas"></span></strong> — DPP: <strong>26/11/2025</strong></p>
+    <p><span class="icone">📅</span><strong>Idade Gestacional (Ultrassom): <span id="usgSemanas"></span></strong> — DPP: <strong>31/10/2025</strong></p>
     <p><span class="icone">⏰</span>Dias restantes (DUM): <strong id="diasRestantes"></strong></p>
     <p><span class="icone">📊</span>Trimestre: <strong>2º Trimestre</strong></p>
     <p><span class="icone">ℹ️</span>Informações do Trimestre: <em>Período mais confortável da gravidez. O bebê está crescendo rapidamente.</em></p>
@@ -53,8 +51,10 @@
   </div>
 
   <div class="section">
-    <h2>📖 Versículo do Dia</h2>
-    <blockquote id="versiculo">Carregando versículo...</blockquote>
+    <h2>🙏 Palavra do Dia</h2>
+    <blockquote>
+      “A paz exige quatro condições essenciais: verdade, justiça, amor e liberdade.” — <strong>Papa João Paulo II</strong>
+    </blockquote>
   </div>
 
   <div class="section">
@@ -74,19 +74,14 @@
     }
 
     const dum = calcSemanasDias("2025-02-20");
-    const usg = calcSemanasDias("2025-01-31"); // 12s4d antes de 23/04
+    const usg = calcSemanasDias("2025-01-31");
 
-    document.getElementById("dumSemanas").innerText = `${dum.semanas} semanas e ${dum.rest0} dias`;
-    document.getElementById("usgSemanas").innerText = `${usg.semanas} semanas e ${usg.rest0} dias`;
+    document.getElementById("dumSemanas").innerText = `${dum.semanas} semanas e ${dum.resto} dias`;
+    document.getElementById("usgSemanas").innerText = `${usg.semanas} semanas e ${usg.resto} dias`;
     document.getElementById("diasRestantes").innerText = `${280 - dum.dias} dias`;
 
-    fetch('/versiculo')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('versiculo').innerText = `"${data.texto}" — ${data.referencia}`;
-      });
+    const semanaAtual = dum.semanas;
 
-    const semanaAtual = dum.semanas; // ou use `Math.min(dum.semanas, usg.semanas)`
     fetch('/data/gravidez.json')
       .then(res => res.json())
       .then(json => {
