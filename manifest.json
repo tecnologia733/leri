@@ -1,8 +1,8 @@
 {
-  "name": "Calculadora Gestacional de Lerinha 💕",
-  "short_name": "Lerinha 🤰",
-  "description": "App para acompanhar a gravidez da Lerinha, semana a semana 💗",
-  "start_url": "./index.html",
+  "name": "Calculadora de Lerinha 💕",
+  "short_name": "Lerinha 💕",
+  "description": "App para acompanhar a gravidez de Lerinha, semana a semana 💗",
+  "start_url": "",
   "display": "standalone",
   "background_color": "#fffdf8",
   "theme_color": "#fff0f5",
