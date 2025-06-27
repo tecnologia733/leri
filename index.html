@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>🤰🏻Calculadora Gestacional de Lerinha 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       background: #fffdfc;
@@ -119,46 +120,82 @@
 </footer>
 
 <script>
-const HOJE = new Date();
+document.addEventListener("DOMContentLoaded", () => {
+  const HOJE = new Date();
 
-function calcGestacao(dataInicio) {
-  const inicio = new Date(dataInicio);
-  const dias = Math.floor((HOJE - inicio) / (1000 * 60 * 60 * 24));
-  const semanas = Math.floor(dias / 7);
-  const resto = dias % 7;
-  const meses = (semanas / 4.345).toFixed(1);
-  return { dias, semanas, resto, meses };
-}
-
-const gravidez = {
-  "18": {
-    trimestre: "2º Trimestre",
-    trimestreInfo: "Fase confortável da gestação. Menos enjoo, mais energia.",
-    desenvolvimento: "Sistema nervoso se desenvolve e o bebê se move bastante.",
-    cientifico: "Bebê com cerca de 14 cm e quase 200g. Genitália externa formada.",
-    cuidados: "Hidrate-se, evite longos períodos em pé, e descanse bastante."
-  },
-  "21": {
-    trimestre: "2º Trimestre",
-    trimestreInfo: "O bebê ouve sons, reage à voz e tem espaço para se movimentar.",
-    desenvolvimento: "Com cerca de 26 cm e 340g, reflexos e audição se destacam.",
-    cientifico: "Medula óssea já produz sangue. Olhos e sistema digestivo evoluindo.",
-    cuidados: "Eleve as pernas, mantenha-se hidratada e use roupas confortáveis."
+  function calcGestacao(dataInicio) {
+    const inicio = new Date(dataInicio);
+    const dias = Math.floor((HOJE - inicio) / (1000 * 60 * 60 * 24));
+    const semanas = Math.floor(dias / 7);
+    const resto = dias % 7;
+    const meses = (semanas / 4.345).toFixed(1);
+    return { dias, semanas, resto, meses };
   }
-};
 
-const dum = calcGestacao("2025-02-20");
-const usg = calcGestacao("2025-01-31");
+  const gravidez = {
+    "18": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Fase confortável da gestação. Menos enjoo, mais energia.",
+      desenvolvimento: "Sistema nervoso se desenvolve e o bebê se move bastante.",
+      cientifico: "Bebê com cerca de 14 cm e quase 200g. Genitália externa formada.",
+      cuidados: "Hidrate-se, evite longos períodos em pé, e descanse bastante."
+    },
+    "21": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "O bebê ouve sons, reage à voz e tem espaço para se movimentar.",
+      desenvolvimento: "Com cerca de 26 cm e 340g, reflexos e audição se destacam.",
+      cientifico: "Medula óssea já produz sangue. Olhos e sistema digestivo evoluindo.",
+      cuidados: "Eleve as pernas, mantenha-se hidratada e use roupas confortáveis."
+    }
+  };
 
-let modoDUM = "semanas";
-let modoUSG = "semanas";
+  const dum = calcGestacao("2025-02-20");
+  const usg = calcGestacao("2025-01-31");
 
-function formatar(g, modo) {
-  return modo === "semanas"
-    ? `${g.semanas} semanas e ${g.resto} dias`
-    : `${g.meses} meses (aproximadamente)`;
-}
+  let modoDUM = "semanas";
+  let modoUSG = "semanas";
 
-function alternarDUM() {
-  modoDUM = modoDUM === "semanas" ? "meses" : "semanas";
-  renderizar
+  function formatar(g, modo) {
+    return modo === "semanas"
+      ? `${g.semanas} semanas e ${g.resto} dias`
+      : `${g.meses} meses (aproximadamente)`;
+  }
+
+  function alternarDUM() {
+    modoDUM = modoDUM === "semanas" ? "meses" : "semanas";
+    renderizar();
+  }
+
+  function alternarUSG() {
+    modoUSG = modoUSG === "semanas" ? "meses" : "semanas";
+    renderizar();
+  }
+
+  function renderizar() {
+    // DUM
+    document.getElementById("dumIdade").innerText = formatar(dum, modoDUM);
+    document.getElementById("dumDiasRestantes").innerText = `${280 - dum.dias} dias`;
+    const d = gravidez[dum.semanas] || {};
+    document.getElementById("dumTrimestre").innerText = d.trimestre || "";
+    document.getElementById("dumTrimestreInfo").innerText = d.trimestreInfo || "";
+    document.getElementById("dumDesenvolvimento").innerText = d.desenvolvimento || "";
+    document.getElementById("dumCientifico").innerText = d.cientifico || "";
+    document.getElementById("dumCuidados").innerText = d.cuidados || "";
+
+    // USG
+    document.getElementById("usgIdade").innerText = formatar(usg, modoUSG);
+    document.getElementById("usgDiasRestantes").innerText = `${280 - usg.dias} dias`;
+    const u = gravidez[usg.semanas] || {};
+    document.getElementById("usgTrimestre").innerText = u.trimestre || "";
+    document.getElementById("usgTrimestreInfo").innerText = u.trimestreInfo || "";
+    document.getElementById("usgDesenvolvimento").innerText = u.desenvolvimento || "";
+    document.getElementById("usgCientifico").innerText = u.cientifico || "";
+    document.getElementById("usgCuidados").innerText = u.cuidados || "";
+  }
+
+  renderizar();
+});
+</script>
+
+</body>
+</html>
