@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>🤰 Calculadora Gestacional - Lerinha</title>
+  <title>🤰 Calculadora Gestacional de Lerinha</title>
   <style>
     body {
       background: #fffdfc;
@@ -42,31 +42,36 @@
   <h1>Olá meu amor Lerinha! 💕</h1>
 
   <div class="section">
-    <p><span class="icone">📅</span><strong>Idade Gestacional (DUM - 20/02/2025): <span id="dumSemanas"></span></strong> — DPP: <strong>26/11/2025</strong></p>
-    <p><span class="icone">📅</span><strong>Idade Gestacional (Ultrassom - 23/04/2025): <span id="usgSemanas"></span></strong> — DPP: <strong>31/10/2025</strong></p>
-    <p><span class="icone">⏰</span>Dias restantes (DUM): <strong id="diasRestantes"></strong></p>
-    <p><span class="icone">📊</span>Trimestre: <strong id="trimestre"></strong></p>
-    <p><span class="icone">ℹ️</span>Informações do Trimestre: <em>Período mais confortável da gravidez. O bebê está crescendo rapidamente.</em></p>
-    <p><span class="icone">👶</span>Desenvolvimento do Bebê (<span id="semanaTexto"></span>): <em>Você pode sentir os primeiros movimentos. É possível saber o sexo do bebê.</em></p>
+    <h2>🩷 Acompanhamento pela DUM (20/02/2025)</h2>
+    <p><span class="icone">📅</span><strong>Idade Gestacional:</strong> <span id="dumGestacao"></span></p>
+    <p><span class="icone">📆</span><strong>DPP:</strong> 26/11/2025</p>
+    <p><span class="icone">⏰</span><strong>Dias restantes:</strong> <span id="dumRestantes"></span></p>
+    <p><span class="icone">📊</span><strong>Trimestre:</strong> <span id="dumTrimestre"></span></p>
+    <p><span class="icone">ℹ️</span><strong>Informações do Trimestre:</strong> Período mais confortável da gravidez. O bebê está crescendo rapidamente.</p>
+    <p><span class="icone">👶</span><strong>Desenvolvimento do Bebê:</strong> <em id="dumDesenvolvimento"></em></p>
   </div>
 
   <div class="section">
-    <h2>🙏 Palavra do Dia</h2>
-    <blockquote>
-      “A paz exige quatro condições essenciais: verdade, justiça, amor e liberdade.” — <strong>Papa João Paulo II</strong>
-    </blockquote>
+    <h2>💜 Acompanhamento por Ultrassom (23/04/2025)</h2>
+    <p><span class="icone">📅</span><strong>Idade Gestacional:</strong> <span id="usgGestacao"></span></p>
+    <p><span class="icone">📆</span><strong>DPP:</strong> 31/10/2025</p>
+    <p><span class="icone">⏰</span><strong>Dias restantes:</strong> <span id="usgRestantes"></span></p>
+    <p><span class="icone">📊</span><strong>Trimestre:</strong> <span id="usgTrimestre"></span></p>
+    <p><span class="icone">ℹ️</span><strong>Informações do Trimestre:</strong> Período mais confortável da gravidez. O bebê está crescendo rapidamente.</p>
+    <p><span class="icone">👶</span><strong>Desenvolvimento do Bebê:</strong> <em id="usgDesenvolvimento"></em></p>
   </div>
 
   <div class="section">
-    <h2>🔬 Informações Científicas da Semana</h2>
+    <h2>🔬 Informações Científicas da Semana (pela DUM)</h2>
     <div id="infoSemana">Carregando...</div>
   </div>
 
   <script>
     const HOJE = new Date();
 
-    function calcSemanasDias(dataInicio) {
-      const diff = HOJE - new Date(dataInicio);
+    function calcGestacao(dataInicio) {
+      const inicio = new Date(dataInicio);
+      const diff = HOJE - inicio;
       const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
       const semanas = Math.floor(dias / 7);
       const resto = dias % 7;
@@ -79,17 +84,23 @@
       return "3º Trimestre";
     }
 
-    const dum = calcSemanasDias("2025-02-20");
-    const usg = calcSemanasDias("2025-01-31"); // 12s4d antes de 23/04/2025
+    const dum = calcGestacao("2025-02-20");
+    const usg = calcGestacao("2025-01-31"); // 12s4d antes de 23/04
 
-    document.getElementById("dumSemanas").innerText = `${dum.semanas} semanas e ${dum.resto} dias`;
-    document.getElementById("usgSemanas").innerText = `${usg.semanas} semanas e ${usg.resto} dias`;
-    document.getElementById("diasRestantes").innerText = `${280 - dum.dias} dias`;
-    document.getElementById("trimestre").innerText = getTrimestre(dum.semanas);
-    document.getElementById("semanaTexto").innerText = `${dum.semanas} semanas`;
+    // Renderizar infos DUM
+    document.getElementById("dumGestacao").innerText = `${dum.semanas} semanas e ${dum.rest0 || dum.resto} dias`;
+    document.getElementById("dumRestantes").innerText = `${280 - dum.dias} dias`;
+    document.getElementById("dumTrimestre").innerText = getTrimestre(dum.semanas);
+    document.getElementById("dumDesenvolvimento").innerText = `Você pode sentir os primeiros movimentos. É possível saber o sexo do bebê.`;
 
+    // Renderizar infos USG
+    document.getElementById("usgGestacao").innerText = `${usg.semanas} semanas e ${usg.rest0 || usg.resto} dias`;
+    document.getElementById("usgRestantes").innerText = `${280 - usg.dias} dias`;
+    document.getElementById("usgTrimestre").innerText = getTrimestre(usg.semanas);
+    document.getElementById("usgDesenvolvimento").innerText = `Você pode sentir os primeiros movimentos. É possível saber o sexo do bebê.`;
+
+    // Informação científica pela DUM
     const semanaAtual = dum.semanas;
-
     fetch('data/gravidez.json')
       .then(res => res.json())
       .then(json => {
