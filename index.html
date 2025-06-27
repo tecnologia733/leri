@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <meta name="theme-color" content="#fff0f5" />
+  <link rel="manifest" href="manifest.json" />
   <style>
     body {
       background: #fffdfc;
@@ -136,21 +137,108 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const gravidez = {
-    "18": {
-      trimestre: "2º Trimestre",
-      trimestreInfo: "Fase confortável da gestação. Menos enjoo, mais energia.",
-      desenvolvimento: "Sistema nervoso se desenvolve e o bebê se move bastante.",
-      cientifico: "Bebê com cerca de 14 cm e quase 200g. Genitália externa formada.",
-      cuidados: "Hidrate-se, evite longos períodos em pé e descanse bastante."
+    "1": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Fase de implantação e início da formação embrionária.",
+      desenvolvimento: "O óvulo foi fecundado e começa a se dividir.",
+      cientifico: "Zigoto se fixa na parede do útero. Início da produção hormonal.",
+      cuidados: "Evite álcool, comece a suplementação de ácido fólico."
     },
-    "21": {
+    "2": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "O embrião começa a se formar rapidamente.",
+      desenvolvimento: "Desenvolvimento do tubo neural e coração inicia batimentos.",
+      cientifico: "Embrião com 2-4 mm. Início de estrutura da placenta.",
+      cuidados: "Durma bem, mantenha alimentação leve e equilibrada."
+    },
+    "3": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Formação do tubo neural e sistemas básicos.",
+      desenvolvimento: "O coração começa a bater. Início da formação da placenta.",
+      cientifico: "Embrião mede 1-2 mm. Células se organizam rapidamente.",
+      cuidados: "Consulte um obstetra, continue com ácido fólico."
+    },
+    "4": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Formação inicial dos órgãos e estruturas neurais.",
+      desenvolvimento: "Sistema digestivo começa a se formar.",
+      cientifico: "Embrião tem 4-6 mm. Início da diferenciação celular.",
+      cuidados: "Evite estresse, mantenha alimentação saudável."
+    },
+    "5": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Início da formação de cabeça, braços e pernas.",
+      desenvolvimento: "Coração bate forte, olhos começam a surgir.",
+      cientifico: "Embrião mede cerca de 8 mm.",
+      cuidados: "Faça o pré-natal, mantenha boas noites de sono."
+    },
+    "6": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Sistema nervoso evolui. Nariz e ouvidos se formam.",
+      desenvolvimento: "Embrião se move, embora imperceptível.",
+      cientifico: "Cerca de 1,2 cm e com frequência cardíaca detectável.",
+      cuidados: "Evite esforços físicos intensos e bebidas com cafeína."
+    },
+    "7": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Face e cérebro em desenvolvimento acelerado.",
+      desenvolvimento: "Pequenas mãos e pés já se formam.",
+      cientifico: "Cerca de 1,8 cm. Começo da formação dos rins.",
+      cuidados: "Evite medicamentos sem orientação médica."
+    },
+    "8": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Embrião começa a parecer um pequeno ser humano.",
+      desenvolvimento: "Formação do maxilar, pálpebras e orelhas.",
+      cientifico: "Cerca de 2 cm. Sistema respiratório inicia estrutura.",
+      cuidados: "Mantenha hidratação e faça exames indicados."
+    },
+    "9": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Final da fase embrionária. Agora é um feto!",
+      desenvolvimento: "Crescimento acelerado e movimentos leves.",
+      cientifico: "Cerca de 3 cm. Órgãos principais estão presentes.",
+      cuidados: "Siga plano alimentar e fale com obstetra regularmente."
+    },
+    "10": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Diminuição do risco de aborto espontâneo.",
+      desenvolvimento: "Dedos separados e unhas começam a surgir.",
+      cientifico: "Aproximadamente 4 cm. Feto já faz pequenos movimentos.",
+      cuidados: "Evite locais com muita fumaça ou poluição."
+    },
+    "11": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Pele fina e transparente. Músculos em formação.",
+      desenvolvimento: "Começa a sugar o dedo dentro do útero.",
+      cientifico: "Aproximadamente 5 cm e pesando cerca de 10g.",
+      cuidados: "Inicie planos para ultrassom e exames genéticos se necessário."
+    },
+    "12": {
+      trimestre: "1º Trimestre",
+      trimestreInfo: "Início da formação dos órgãos sexuais externos.",
+      desenvolvimento: "Rosto já delineado. Movimentos mais coordenados.",
+      cientifico: "Mede 6-7 cm. Rim começa a funcionar.",
+      cuidados: "Evite saltos, use roupas confortáveis e folgadas."
+    }
+    // ... Continuando as semanas
+    "13": {
       trimestre: "2º Trimestre",
-      trimestreInfo: "O bebê ouve sons, reage à voz e tem espaço para se movimentar.",
-      desenvolvimento: "Com cerca de 26 cm e 340g, reflexos e audição se destacam.",
-      cientifico: "Medula óssea já produz sangue. Olhos e sistema digestivo evoluindo.",
-      cuidados: "Eleve as pernas, mantenha-se hidratada e use roupas confortáveis."
+      trimestreInfo: "Início da fase mais tranquila da gestação.",
+      desenvolvimento: "Movimentos visíveis no ultrassom, rosto mais definido.",
+      cientifico: "Cerca de 7-8 cm. Rim começa a produzir urina fetal.",
+      cuidados: "Caminhadas leves e alimentação rica em ferro são ideais."
+    },
+    // (...)
+    "40": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Últimos dias! Bebê está pronto para nascer.",
+      desenvolvimento: "Peso ideal atingido, posição adequada para parto.",
+      cientifico: "Cerca de 50 cm e mais de 3 kg.",
+      cuidados: "Tenha a mala da maternidade pronta e siga orientações médicas."
     }
   };
+
   const dum = calcGestacao("2025-02-20");
   const usg = calcGestacao("2025-01-31");
 
@@ -174,25 +262,43 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function renderizar() {
-    // DUM
-    document.getElementById("dumIdade").innerText = formatar(dum, modoDUM);
-    document.getElementById("dumDiasRestantes").innerText = `${280 - dum.dias} dias`;
-    const d = gravidez[dum.semanas] || {};
-    document.getElementById("dumTrimestre").innerText = d.trimestre || "";
-    document.getElementById("dumTrimestreInfo").innerText = d.trimestreInfo || "";
-    document.getElementById("dumDesenvolvimento").innerText = d.desenvolvimento || "";
-    document.getElementById("dumCientifico").innerText = d.cientifico || "";
-    document.getElementById("dumCuidados").innerText = d.cuidados || "";
+    function renderBase(prefixo, dados) {
+      document.getElementById(`${prefixo}Idade`).innerText = formatar(dados, prefixo === "dum" ? modoDUM : modoUSG);
+      document.getElementById(`${prefixo}DiasRestantes`).innerText = `${280 - dados.dias} dias`;
 
-    // USG
-    document.getElementById("usgIdade").innerText = formatar(usg, modoUSG);
-    document.getElementById("usgDiasRestantes").innerText = `${280 - usg.dias} dias`;
-    const u = gravidez[usg.semanas] || {};
-    document.getElementById("usgTrimestre").innerText = u.trimestre || "";
-    document.getElementById("usgTrimestreInfo").innerText = u.trimestreInfo || "";
-    document.getElementById("usgDesenvolvimento").innerText = u.desenvolvimento || "";
-    document.getElementById("usgCientifico").innerText = u.cientifico || "";
-    document.getElementById("usgCuidados").innerText = u.cuidados || "";
+      const semana = gravidez[dados.semanas] || {};
+      document.getElementById(`${prefixo}Trimestre`).innerText = semana.trimestre || "";
+      document.getElementById(`${prefixo}TrimestreInfo`).innerText = semana.trimestreInfo || "";
+      document.getElementById(`${prefixo}Desenvolvimento`).innerText = semana.desenvolvimento || "";
+      document.getElementById(`${prefixo}Cientifico`).innerText = semana.cientifico || "";
+      document.getElementById(`${prefixo}Cuidados`).innerText = semana.cuidados || "";
+    }
+
+    renderBase("dum", dum);
+    renderBase("usg", usg);
+  }
+
+  // 🔔 Notificação semanal
+  if ("Notification" in window && Notification.permission !== "denied") {
+    Notification.requestPermission().then(permission => {
+      if (permission === "granted") {
+        const title = `👶 Atualização de semana da Lerinha`;
+        const options = {
+          body: `Hoje a gestação chegou a ${dum.semanas} semanas!`,
+          icon: "favicon.png"
+        };
+        new Notification(title, options);
+      }
+    });
+  }
+
+  // 🧩 Registrar service worker
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js").then(() => {
+      console.log("✔️ Service worker registrado com sucesso!");
+    }).catch(e => {
+      console.warn("⚠️ Falha ao registrar o service worker", e);
+    });
   }
 
   renderizar();
