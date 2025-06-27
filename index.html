@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>🤰 Calculadora Gestacional de Lerinha 💕</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="icon" href="favicon.png" type="image/png" />
   <link rel="apple-touch-icon" href="favicon.png" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#fffdf8" />
@@ -15,7 +15,7 @@
     body {
       background: #fffdf8;
       color: #111;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
       letter-spacing: normal;
       padding: 2rem;
       max-width: 800px;
@@ -34,7 +34,7 @@
       border-left: 5px solid #c2185b;
       padding: 1rem;
       border-radius: 6px;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
     }
     .icone {
       font-size: 1.3rem;
@@ -86,7 +86,6 @@
 <body>
 
 <h1>🤰 Calculadora Gestacional de Lerinha 💕</h1>
-
 <div class="section">
   <h2>🩷 Acompanhamento pela DUM (20/02/2025)</h2>
   <p><span class="icone">📅</span><strong>Idade Gestacional:</strong>
@@ -101,6 +100,7 @@
   <p><span class="icone">🧬</span><strong>Detalhes Científicos:</strong> <em id="dumCientifico"></em></p>
   <p><span class="icone">❤️</span><strong>Cuidados:</strong> <em id="dumCuidados"></em></p>
 </div>
+
 <div class="section">
   <h2>💜 Acompanhamento por Ultrassom (23/04/2025)</h2>
   <p><span class="icone">📅</span><strong>Idade Gestacional:</strong>
@@ -126,7 +126,6 @@
     <a href="https://wa.me/5511916698212" target="_blank" style="text-decoration:none;color:#25D366;">WhatsApp</a>
   </p>
 </footer>
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const HOJE = new Date();
@@ -151,124 +150,290 @@ document.addEventListener("DOMContentLoaded", () => {
       ? `${g.semanas} semanas e ${g.resto} dias`
       : `${g.meses} meses (aproximadamente)`;
   }
+
+  // Dicionário gestacional (parte 1: semanas 1–13)
   const gravidez = {
     "1": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Fase de implantação e início da divisão celular.",
-      desenvolvimento: "Fecundação ocorreu e o zigoto iniciou sua jornada.",
-      cientifico: "Células começam a se multiplicar rapidamente.",
-      cuidados: "Evite álcool, cafeína e comece o ácido fólico."
+      trimestreInfo: "Semana de preparação. Óvulo e espermatozoide ainda vão se encontrar.",
+      desenvolvimento: "O corpo se prepara para a ovulação.",
+      cientifico: "Endométrio se espessa. Ovário amadurece um folículo.",
+      cuidados: "Evite álcool e tabaco. Inicie ácido fólico."
     },
     "2": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Ainda sem sintomas, mas o corpo começa a se preparar.",
-      desenvolvimento: "Fixação do óvulo na parede uterina.",
-      cientifico: "Desenvolvimento embrionário inicial e da placenta.",
-      cuidados: "Alimentação leve, evite esforço físico intenso."
+      trimestreInfo: "Fase de ovulação e possível fecundação.",
+      desenvolvimento: "Zigoto se forma e viaja até o útero.",
+      cientifico: "Início da divisão celular e formação do blastocisto.",
+      cuidados: "Manter alimentação saudável e evitar estresse."
     },
     "3": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "O embrião começa a se formar.",
-      desenvolvimento: "Tubos neurais e coração primitivo aparecem.",
-      cientifico: "Embrião com 2 mm e batimento cardíaco começa.",
-      cuidados: "Inicie o pré-natal. Hidrate-se bem!"
+      trimestreInfo: "Implantação do embrião no útero.",
+      desenvolvimento: "Começo do desenvolvimento embrionário.",
+      cientifico: "Formação da placenta e início do tubo neural.",
+      cuidados: "Evite medicamentos sem orientação médica."
     },
     "4": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Começam a surgir órgãos vitais.",
-      desenvolvimento: "Formação inicial do sistema nervoso e coração.",
-      cientifico: "Embrião de ~4 mm. Formação da vesícula vitelínica.",
-      cuidados: "Evite remédios sem orientação médica."
+      trimestreInfo: "Início da formação dos sistemas vitais.",
+      desenvolvimento: "Coração começa a pulsar. Tubo neural fecha.",
+      cientifico: "Embrião com ~1 mm. Hormônio hCG detectável.",
+      cuidados: "Inicie pré-natal. Hidrate-se bem."
     },
     "5": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Desenvolvimento do cérebro e medula espinhal.",
-      desenvolvimento: "Começam a se formar olhos e membros.",
-      cientifico: "Embrião de ~6 mm com batimentos cardíacos fortes.",
-      cuidados: "Sono adequado e rotina saudável são essenciais."
+      trimestreInfo: "Embrião se desenvolve rapidamente.",
+      desenvolvimento: "Formação de olhos, membros e cérebro inicial.",
+      cientifico: "Embrião com ~2 mm. Divisões celulares intensas.",
+      cuidados: "Sono adequado e suplementação de ferro/ácido fólico."
     },
     "6": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "A placenta se desenvolve para nutrir o bebê.",
-      desenvolvimento: "Braços e pernas começam a se alongar.",
-      cientifico: "Cerca de 1 cm. Formação da coluna vertebral.",
-      cuidados: "Evite substâncias químicas e alimentos crus."
+      trimestreInfo: "Desenvolvimento dos sentidos e extremidades.",
+      desenvolvimento: "Início das digitais e dobramentos dos braços.",
+      cientifico: "~4 mm. Sistema circulatório se complexifica.",
+      cuidados: "Evite produtos químicos e alimentos crus."
     },
     "7": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Formação de olhos, boca e narinas.",
-      desenvolvimento: "Movimentos embrionários involuntários.",
-      cientifico: "Embrião com ~1,3 cm e 1 g de peso.",
-      cuidados: "Consuma ferro e mantenha repouso moderado."
+      trimestreInfo: "Cérebro e rosto em formação.",
+      desenvolvimento: "Nariz e olhos começam a se destacar.",
+      cientifico: "~1,2 cm. Cordão umbilical funcional.",
+      cuidados: "Use roupas leves. Priorize alimentos com cálcio."
     },
     "8": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Começo da fase fetal!",
-      desenvolvimento: "Órgãos internos começam a se organizar.",
-      cientifico: "Cerca de 1,6 cm e 1 g. Cabeça grande proporcional.",
-      cuidados: "Continue com ácido fólico e evite estresse."
+      trimestreInfo: "O embrião começa a se mover.",
+      desenvolvimento: "Músculos e articulações se formam.",
+      cientifico: "~1,6 cm. Início dos órgãos sensoriais.",
+      cuidados: "Continue ácido fólico. Hidrate-se bem."
     },
     "9": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Feto se torna mais ativo.",
-      desenvolvimento: "Fórmulas dos dedos das mãos e pés aparecem.",
-      cientifico: "Cerca de 2,3 cm. Formação dos rins e fígado.",
-      cuidados: "Inclua vegetais e grãos integrais nas refeições."
+      trimestreInfo: "Passagem para a fase fetal.",
+      desenvolvimento: "Dedos se separam. Cauda embrionária desaparece.",
+      cientifico: "~2,3 cm e 2 g.",
+      cuidados: "Manter descanso adequado. Alimentação rica em ferro."
     },
     "10": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Fechamento do tubo neural.",
-      desenvolvimento: "Cabeça se arredonda e olhos migram para frente.",
-      cientifico: "Feto com 3 cm e 4 g. Começa a engolir líquido.",
-      cuidados: "Hidratação constante e pequenos lanches."
+      trimestreInfo: "Feto começa a engolir líquido amniótico.",
+      desenvolvimento: "Unhas e cordas vocais aparecem.",
+      cientifico: "~3,5 cm e 5 g. Cérebro em expansão.",
+      cuidados: "Evitar jejum prolongado. Pequenas refeições regulares."
     },
     "11": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Próxima fase: menos enjoo!",
-      desenvolvimento: "Pulmões e intestinos ganham forma.",
-      cientifico: "Cerca de 4 cm. Estruturas genitais começam a aparecer.",
-      cuidados: "Alimente-se a cada 3h e evite pular refeições."
+      trimestreInfo: "Feto responde a estímulos leves.",
+      desenvolvimento: "Reflexo de sucção e primeiros chutes.",
+      cientifico: "~4 cm e 8 g.",
+      cuidados: "Não levante muito peso. Faça pausas durante o dia."
     },
     "12": {
       trimestre: "1º Trimestre",
-      trimestreInfo: "Feto responde a estímulos externos.",
-      desenvolvimento: "Reflexos aparecem (chupar dedo, mexer).",
-      cientifico: "6 cm e 14 g. Ossos começam a endurecer.",
-      cuidados: "Evite roupas apertadas, use calçados confortáveis."
+      trimestreInfo: "A maioria dos órgãos já se formou.",
+      desenvolvimento: "Fígado começa a produzir bile. Intestino migra.",
+      cientifico: "~5,5 cm e 14 g.",
+      cuidados: "Planeje exames de ultrassom. Continue com boa hidratação."
     },
     "13": {
       trimestre: "2º Trimestre",
-      trimestreInfo: "Começa o trimestre mais estável.",
-      desenvolvimento: "Músculos se fortalecem, movimentos se intensificam.",
-      cientifico: "7,5 cm e 23 g. Desenvolvimento das cordas vocais.",
-      cuidados: "Pratique alongamento suave e caminhadas leves."
+      trimestreInfo: "Transição para uma fase mais estável.",
+      desenvolvimento: "Rosto bem definido. Genitais externos se formam.",
+      cientifico: "~7 cm e 20 g.",
+      cuidados: "Movimente-se suavemente e cuide da saúde bucal."
     },
-    // As semanas de 14 a 40 continuam na próxima parte
-    // Continuação do dicionário `gravidez`:
     "14": {
       trimestre: "2º Trimestre",
-      trimestreInfo: "Bebê começa a fazer caretas e chupar o dedo.",
-      desenvolvimento: "Sistema urinário funciona, fígado começa a produzir bile.",
-      cientifico: "8-9 cm e 43 g.",
-      cuidados: "Evite longos períodos em pé. Boa hidratação continua essencial."
+      trimestreInfo: "Início da fase mais tranquila da gestação.",
+      desenvolvimento: "Rosto mais definido, movimentos se tornam sutis.",
+      cientifico: "~8,5 cm e 45 g. Genitália externa visível no ultrassom.",
+      cuidados: "Pratique caminhadas leves e mantenha hidratação."
     },
     "15": {
       trimestre: "2º Trimestre",
-      trimestreInfo: "Pele fina e sobrancelhas em formação.",
-      desenvolvimento: "Bebê começa a ter sensibilidade à luz.",
-      cientifico: "10 cm e 70 g.",
-      cuidados: "Use roupas leves, consulte nutricionista se necessário."
+      trimestreInfo: "Sistema auditivo começa a funcionar.",
+      desenvolvimento: "O bebê pode escutar sons externos abafados.",
+      cientifico: "~10 cm e 70 g. Ossos começam a se calcificar.",
+      cuidados: "Evite exposição a ruídos altos. Roupas leves recomendadas."
     },
-    // (...) Semanas de 16 a 39 mantidas aqui com conteúdo real e leve
+    "16": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Expressões faciais surgem. Ouvidos e olhos se ajustam.",
+      desenvolvimento: "Músculos se fortalecem com movimentos espontâneos.",
+      cientifico: "11,5 cm e 100 g. Formação das articulações.",
+      cuidados: "Faça atividades leves. Durma virada para o lado esquerdo."
+    },
+    "17": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Sistema cardiovascular em crescimento.",
+      desenvolvimento: "Bebê começa a ganhar gordura corporal.",
+      cientifico: "13 cm e 140 g. Circulação mais ativa.",
+      cuidados: "Evite permanecer sentada por muito tempo. Movimente-se."
+    },
+    "18": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Fase confortável da gestação. Menos enjoo, mais energia.",
+      desenvolvimento: "Sistema nervoso se desenvolve e o bebê se move bastante.",
+      cientifico: "Bebê com cerca de 14 cm e quase 200 g. Genitália externa formada.",
+      cuidados: "Hidrate-se, evite longos períodos em pé e descanse bastante."
+    },
+    "19": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Bebê começa a ouvir batimentos cardíacos da mãe.",
+      desenvolvimento: "Pele fina e recoberta pelo vérnix protetor.",
+      cientifico: "15,5 cm e 240 g.",
+      cuidados: "Atenção à postura e alimentação equilibrada com cálcio."
+    },
+    "20": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Metade da gestação!",
+      desenvolvimento: "Os sentidos do paladar e tato começam a se desenvolver.",
+      cientifico: "16,5 cm e 280 g. Ultrassom morfológico recomendado.",
+      cuidados: "Planeje acompanhamento médico com exames complementares."
+    },
+    "21": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "O bebê ouve sons, reage à voz e tem espaço para se movimentar.",
+      desenvolvimento: "Com cerca de 26 cm e 340 g, reflexos e audição se destacam.",
+      cientifico: "Medula óssea já produz sangue. Olhos e sistema digestivo evoluindo.",
+      cuidados: "Eleve as pernas, mantenha-se hidratada e use roupas confortáveis."
+    },
+    "22": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Coordenação motora começa a aparecer.",
+      desenvolvimento: "O bebê responde a luzes e sons externos.",
+      cientifico: "27 cm e 410 g.",
+      cuidados: "Faça pausas durante o dia. Pratique respiração consciente."
+    },
+    "23": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Pele enrugada. Começo da formação de pigmentos.",
+      desenvolvimento: "Pulmões se desenvolvem, mas ainda imaturos.",
+      cientifico: "28 cm e 500 g.",
+      cuidados: "Controle o ganho de peso e mantenha rotina de exames."
+    },
+    "24": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Bebê com reflexo de sucção e audição aprimorada.",
+      desenvolvimento: "Começa a abrir as pálpebras. Possíveis soluços.",
+      cientifico: "30 cm e 600 g.",
+      cuidados: "Fique atenta a contrações prematuras. Descanse bem."
+    },
+    "25": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Sistema nervoso em pleno desenvolvimento.",
+      desenvolvimento: "Movimentos mais fortes, já percebidos pela mãe.",
+      cientifico: "32 cm e 700 g.",
+      cuidados: "Redobre atenção com hidratação. Evite alimentos muito salgados."
+    },
+    "26": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Bebê já distingue sons familiares.",
+      desenvolvimento: "Pulmões se preparam para respirar fora do útero.",
+      cientifico: "33 cm e 820 g.",
+      cuidados: "Durma de lado. Faça alongamento leve diariamente."
+    },
+    "27": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Final do segundo trimestre.",
+      desenvolvimento: "Bebê reconhece vozes e interage mais com estímulos externos.",
+      cientifico: "34,5 cm e 900 g.",
+      cuidados: "Planeje terceira ultrassonografia. Alimente-se de forma leve e frequente."
+    },
+    "28": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Início da reta final!",
+      desenvolvimento: "Olhos se abrem. Sono se alterna entre REM e não REM.",
+      cientifico: "36 cm e 1,1 kg.",
+      cuidados: "Monitore inchaços. Evite ficar longos períodos sentada."
+    },
+    "29": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Crescimento acelerado do cérebro.",
+      desenvolvimento: "Movimentos mais fortes. Já reconhece a voz da mãe.",
+      cientifico: "37,5 cm e 1,3 kg.",
+      cuidados: "Alimente-se a cada 3 horas. Priorize fibras."
+    },
+    "30": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Sistema respiratório em estágio avançado.",
+      desenvolvimento: "Unhas crescem. Pele começa a ficar menos enrugada.",
+      cientifico: "39 cm e 1,5 kg.",
+      cuidados: "Durma com travesseiro entre as pernas. Evite sal em excesso."
+    },
+    "31": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Sistema digestivo se desenvolve.",
+      desenvolvimento: "Acumula gordura sob a pele. Coordena respiração e sucção.",
+      cientifico: "41 cm e 1,7 kg.",
+      cuidados: "Faça refeições menores e mais frequentes. Alongue-se."
+    },
+    "32": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Bebê começa a se posicionar com a cabeça para baixo.",
+      desenvolvimento: "Sistemas corporais se sincronizam.",
+      cientifico: "42,5 cm e 1,9 kg.",
+      cuidados: "Evite cafeína e mantenha rotina pré-natal em dia."
+    },
+    "33": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Esqueleto se torna mais rígido.",
+      desenvolvimento: "Pele rosada. Pupilas reagem à luz.",
+      cientifico: "44 cm e 2,1 kg.",
+      cuidados: "Use roupas frescas. Prepare plano de parto com antecedência."
+    },
+    "34": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Cérebro se desenvolve intensamente.",
+      desenvolvimento: "Suga dedo com frequência. Testes respiratórios.",
+      cientifico: "45,5 cm e 2,4 kg.",
+      cuidados: "Evite viagens longas. Sinais de parto prematuro devem ser notados."
+    },
+    "35": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Bebê ocupa quase todo o útero.",
+      desenvolvimento: "Pulmões amadurecem. Músculos tonificados.",
+      cientifico: "46,5 cm e 2,6 kg.",
+      cuidados: "Alimente-se com ferro. Evite esforço excessivo."
+    },
+    "36": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Fase de engajamento: bebê desce para a pelve.",
+      desenvolvimento: "Suga líquido amniótico. Prepara-se para o parto.",
+      cientifico: "47,5 cm e 2,8 kg.",
+      cuidados: "Tenha mala da maternidade pronta. Repouse bastante."
+    },
+    "37": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Considerado termo inicial. Pode nascer saudável.",
+      desenvolvimento: "Acúmulo de gordura subcutânea.",
+      cientifico: "49 cm e 3 kg.",
+      cuidados: "Observe contrações e secreções. Faça últimos exames."
+    },
+    "38": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Pouco espaço no útero. Movimentos menores, porém perceptíveis.",
+      desenvolvimento: "Cordão umbilical grosso e funcional.",
+      cientifico: "50 cm e 3,2 kg.",
+      cuidados: "Alimentação leve. Evite ficar sozinha por muito tempo."
+    },
+    "39": {
+      trimestre: "3º Trimestre",
+      trimestreInfo: "Tudo pronto para o nascimento.",
+      desenvolvimento: "Verifica-se maturidade pulmonar e reflexos fortes.",
+      cientifico: "50 cm e 3,3 kg.",
+      cuidados: "Planeje a ida à maternidade. Repouse. Prepare o corpo e mente."
+    },
     "40": {
       trimestre: "3º Trimestre",
-      trimestreInfo: "Hora de vir ao mundo!",
-      desenvolvimento: "Pulmões maduros, sistema imunológico fortalecido.",
-      cientifico: "50 cm e ~3,4 kg.",
-      cuidados: "Tenha sua bolsa pronta. Muita calma nessa hora!"
+      trimestreInfo: "Últimos dias! Bebê está pronto para nascer.",
+      desenvolvimento: "Peso ideal atingido, posição adequada para parto.",
+      cientifico: "50+ cm e mais de 3,4 kg.",
+      cuidados: "Tenha a mala da maternidade pronta e siga orientações médicas."
     }
   };
-
   function renderizar() {
     function preencher(prefixo, dados) {
       const info = gravidez[dados.semanas] || {};
@@ -295,12 +460,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizar();
   };
 
-  // 🔔 Notificação gestacional (leve, no carregamento)
+  // 🔔 Notificação leve da semana gestacional
   if ("Notification" in window && Notification.permission !== "denied") {
     Notification.requestPermission().then(permission => {
       if (permission === "granted") {
-        const texto = `Lerinha está com ${dum.semanas} semanas hoje 💕`;
-        new Notification("👶 Semana Gestacional Atualizada!", {
+        const texto = `Hoje Lerinha está com ${dum.semanas} semanas!`;
+        new Notification("👶 Semana Atual", {
           body: texto,
           icon: "favicon.png"
         });
@@ -308,10 +473,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 📲 Registrar service worker (PWA)
+  // 📲 Registro do service worker para funcionamento offline
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("service-worker.js").then(() => {
       console.log("✔️ Service Worker registrado com sucesso!");
+    }).catch(err => {
+      console.warn("⚠️ Falha ao registrar Service Worker:", err);
     });
   }
 
