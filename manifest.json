@@ -1,0 +1,21 @@
+{
+  "name": "Calculadora Gestacional de Lerinha 💕",
+  "short_name": "Lerinha 🤰",
+  "description": "Acompanhe a gestação com amor, ciência e emojis 💓",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff0f5",
+  "theme_color": "#fff0f5",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
