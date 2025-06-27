@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Olá meu amor Lerinha!</title>
+  <title>🤰 Calculadora Gestacional de Lerinha</title>
   <style>
     body {
       background: #fffdfc;
@@ -22,83 +22,85 @@
       background: #fff0f5;
       border-left: 5px solid #c2185b;
       padding: 1rem;
-      border-radius: 5px;
+      border-radius: 6px;
     }
     .icone {
       font-size: 1.3rem;
       margin-right: 0.4rem;
     }
     button {
-      margin-left: 8px;
       font-size: 0.9rem;
+      margin-left: 8px;
       padding: 2px 6px;
+      border: none;
+      border-radius: 4px;
+      background-color: #ffe3ed;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-<h1>Olá meu amor Lerinha! 💕</h1>
+<h1>🤰 Calculadora Gestacional de Lerinha</h1>
 
 <div class="section">
   <h2>🩷 Acompanhamento pela DUM (20/02/2025)</h2>
-  <p><span class="icone">📅</span><strong>Idade Gestacional:</strong> <span id="dumIdade"></span><button onclick="alternarDUM()">↔️</button></p>
+  <p><span class="icone">📅</span><strong>Idade Gestacional:</strong>
+    <span id="dumIdade"></span>
+    <button onclick="alternarDUM()">↔️</button>
+  </p>
   <p><span class="icone">📆</span><strong>DPP:</strong> 26/11/2025</p>
   <p><span class="icone">⏰</span><strong>Dias restantes:</strong> <span id="dumDiasRestantes"></span></p>
   <p><span class="icone">📊</span><strong>Trimestre:</strong> <span id="dumTrimestre"></span></p>
-  <p><span class="icone">ℹ️</span><strong>Informações do Trimestre:</strong> <em id="dumTrimestreInfo"></em></p>
+  <p><span class="icone">ℹ️</span><em id="dumTrimestreInfo"></em></p>
   <p><span class="icone">👶</span><strong>Desenvolvimento do Bebê:</strong> <em id="dumDesenvolvimento"></em></p>
-  <p><span class="icone">🔬</span><strong>Informações Científicas da Semana:</strong></p>
-  <div id="dumCientifico">Carregando...</div>
+  <p><span class="icone">🧬</span><strong>Detalhes Científicos:</strong> <em id="dumCientifico"></em></p>
+  <p><span class="icone">❤️</span><strong>Cuidados da Semana:</strong> <em id="dumCuidados"></em></p>
 </div>
 
 <div class="section">
   <h2>💜 Acompanhamento por Ultrassom (23/04/2025)</h2>
-  <p><span class="icone">📅</span><strong>Idade Gestacional:</strong> <span id="usgIdade"></span><button onclick="alternarUSG()">↔️</button></p>
+  <p><span class="icone">📅</span><strong>Idade Gestacional:</strong>
+    <span id="usgIdade"></span>
+    <button onclick="alternarUSG()">↔️</button>
+  </p>
   <p><span class="icone">📆</span><strong>DPP:</strong> 31/10/2025</p>
   <p><span class="icone">⏰</span><strong>Dias restantes:</strong> <span id="usgDiasRestantes"></span></p>
   <p><span class="icone">📊</span><strong>Trimestre:</strong> <span id="usgTrimestre"></span></p>
-  <p><span class="icone">ℹ️</span><strong>Informações do Trimestre:</strong> <em id="usgTrimestreInfo"></em></p>
+  <p><span class="icone">ℹ️</span><em id="usgTrimestreInfo"></em></p>
   <p><span class="icone">👶</span><strong>Desenvolvimento do Bebê:</strong> <em id="usgDesenvolvimento"></em></p>
-  <p><span class="icone">🔬</span><strong>Informações Científicas da Semana:</strong></p>
-  <div id="usgCientifico">Carregando...</div>
+  <p><span class="icone">🧬</span><strong>Detalhes Científicos:</strong> <em id="usgCientifico"></em></p>
+  <p><span class="icone">❤️</span><strong>Cuidados da Semana:</strong> <em id="usgCuidados"></em></p>
 </div>
 
 <script>
   const HOJE = new Date();
-  const DPP_DUM = new Date("2025-11-26");
-  const DPP_USG = new Date("2025-10-31");
 
-  const SEMANAS_TOTAL = 280 / 7;
-
-  const gravidez = {
-    "18": {
-      titulo: "18ª Semana de Gestação",
-      descricao: "O bebê mede cerca de 14 cm e pesa quase 200g. O sistema nervoso se desenvolve rapidamente.",
-      cuidados: "Manter boa hidratação, comer alimentos ricos em ferro e usar roupas confortáveis.",
-      trimestre: "2º Trimestre",
-      trimestreInfo: "Início do segundo trimestre. Desconfortos diminuem e há mais energia.",
-      desenvolvimento: "O bebê está se movimentando bastante e já é possível ver o sexo no ultrassom."
-    },
-    "21": {
-      titulo: "21ª Semana de Gestação",
-      descricao: "O bebê mede cerca de 26 cm e pesa cerca de 340g. Ele já percebe sons do ambiente.",
-      cuidados: "Combata inchaços com elevação das pernas. Use roupas confortáveis.",
-      trimestre: "2º Trimestre",
-      trimestreInfo: "O bebê cresce rápido, e os pais já interagem com ele pela voz.",
-      desenvolvimento: "A audição está se desenvolvendo. Ele pode ouvir e reagir à voz da mamãe."
-    }
-  };
-
-  function calcGestacao(inicio) {
-    const inicioData = new Date(inicio);
-    const diff = HOJE - inicioData;
-    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+  function calcGestacao(dataInicio) {
+    const inicio = new Date(dataInicio);
+    const dias = Math.floor((HOJE - inicio) / (1000 * 60 * 60 * 24));
     const semanas = Math.floor(dias / 7);
     const resto = dias % 7;
     const meses = (semanas / 4.345).toFixed(1);
     return { dias, semanas, resto, meses };
   }
+
+  const gravidez = {
+    "18": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Início da fase mais confortável da gestação. Menos enjoo e mais energia.",
+      desenvolvimento: "O sistema nervoso se desenvolve e o bebê já se movimenta bastante.",
+      cientifico: "O bebê mede cerca de 14 cm e pesa quase 200g. A genitália externa já está formada.",
+      cuidados: "Beba bastante água, evite longos períodos em pé e opte por roupas leves."
+    },
+    "21": {
+      trimestre: "2º Trimestre",
+      trimestreInfo: "Momento de conexão: o bebê ouve sons, reage à voz da mamãe e tem muito espaço para se movimentar.",
+      desenvolvimento: "O bebê tem cerca de 26 cm e 340g. A audição e os reflexos estão ativos.",
+      cientifico: "Os olhos estão formados e a medula já produz sangue. Ele pode diferenciar sons externos.",
+      cuidados: "Eleve as pernas ao descansar, mantenha boa hidratação e siga os suplementos indicados."
+    }
+  };
 
   const dum = calcGestacao("2025-02-20");
   const usg = calcGestacao("2025-01-31"); // 12s4d antes de 23/04
@@ -106,10 +108,10 @@
   let modoDUM = "semanas";
   let modoUSG = "semanas";
 
-  function formatar({ semanas, resto, meses }, modo) {
+  function formatar(g, modo) {
     return modo === "semanas"
-      ? `${semanas} semanas e ${resto} dias`
-      : `${meses} meses (aproximadamente)`;
+      ? `${g.semanas} semanas e ${g.resto} dias`
+      : `${g.meses} meses (aproximadamente)`;
   }
 
   function alternarDUM() {
@@ -125,25 +127,23 @@
   function renderizar() {
     // DUM
     document.getElementById("dumIdade").innerText = formatar(dum, modoDUM);
-    document.getElementById("dumDiasRestantes").innerText = `${Math.max(0, 280 - dum.dias)} dias`;
-    document.getElementById("dumTrimestre").innerText = gravidez[dum.semanas]?.trimestre || "";
-    document.getElementById("dumTrimestreInfo").innerText = gravidez[dum.semanas]?.trimestreInfo || "";
-    document.getElementById("dumDesenvolvimento").innerText = gravidez[dum.semanas]?.desenvolvimento || "";
-    document.getElementById("dumCientifico").innerHTML =
-      gravidez[dum.semanas]
-        ? `<strong>${gravidez[dum.semanas].titulo}</strong><br>${gravidez[dum.semanas].descricao}<br><br><strong>Cuidados:</strong> ${gravidez[dum.semanas].cuidados}`
-        : "Informações ainda não disponíveis.";
+    document.getElementById("dumDiasRestantes").innerText = `${280 - dum.dias} dias`;
+    const d = gravidez[dum.semanas] || {};
+    document.getElementById("dumTrimestre").innerText = d.trimestre || "";
+    document.getElementById("dumTrimestreInfo").innerText = d.trimestreInfo || "";
+    document.getElementById("dumDesenvolvimento").innerText = d.desenvolvimento || "";
+    document.getElementById("dumCientifico").innerText = d.cientifico || "";
+    document.getElementById("dumCuidados").innerText = d.cuidados || "";
 
     // USG
     document.getElementById("usgIdade").innerText = formatar(usg, modoUSG);
-    document.getElementById("usgDiasRestantes").innerText = `${Math.max(0, 280 - usg.dias)} dias`;
-    document.getElementById("usgTrimestre").innerText = gravidez[usg.semanas]?.trimestre || "";
-    document.getElementById("usgTrimestreInfo").innerText = gravidez[usg.semanas]?.trimestreInfo || "";
-    document.getElementById("usgDesenvolvimento").innerText = gravidez[usg.semanas]?.desenvolvimento || "";
-    document.getElementById("usgCientifico").innerHTML =
-      gravidez[usg.semanas]
-        ? `<strong>${gravidez[usg.semanas].titulo}</strong><br>${gravidez[usg.semanas].descricao}<br><br><strong>Cuidados:</strong> ${gravidez[usg.semanas].cuidados}`
-        : "Informações ainda não disponíveis.";
+    document.getElementById("usgDiasRestantes").innerText = `${280 - usg.dias} dias`;
+    const u = gravidez[usg.semanas] || {};
+    document.getElementById("usgTrimestre").innerText = u.trimestre || "";
+    document.getElementById("usgTrimestreInfo").innerText = u.trimestreInfo || "";
+    document.getElementById("usgDesenvolvimento").innerText = u.desenvolvimento || "";
+    document.getElementById("usgCientifico").innerText = u.cientifico || "";
+    document.getElementById("usgCuidados").innerText = u.cuidados || "";
   }
 
   renderizar();
