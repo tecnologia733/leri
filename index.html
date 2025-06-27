@@ -11,7 +11,7 @@
     body {
       background: #fffdfc;
       color: #333;
-      font-family: 'Segoe UI', 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Color Emoji", "Apple Color Emoji", "Roboto", sans-serif;
       padding: 2rem;
       max-width: 800px;
       margin: auto;
@@ -166,12 +166,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.alternarDUM = () => {
     modoDUM = modoDUM === "semanas" ? "meses" : "semanas";
     renderizar();
-  }
+  };
 
   window.alternarUSG = () => {
     modoUSG = modoUSG === "semanas" ? "meses" : "semanas";
     renderizar();
-  }
+  };
 
   function renderizar() {
     // DUM
