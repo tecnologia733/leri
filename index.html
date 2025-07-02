@@ -128,7 +128,8 @@
 </footer>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const HOJE = new Date();
+  const HOJE = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Bahia" });
+
 
   function calcGestacao(dataInicio) {
     const inicio = new Date(dataInicio);
