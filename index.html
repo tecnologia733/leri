@@ -128,7 +128,9 @@
 </footer>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const HOJE = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Bahia" });
+  const HOJE = new Date();
+HOJE.setHours(12); // fixa o horário para meio-dia e evita erro de fuso UTC±
+
 
 
   function calcGestacao(dataInicio) {
